@@ -7,18 +7,22 @@ def human_readable_price(price):
     else:
         cents = str(price).split(".")[1]
         roubles = int(price)
-        return f"{str(roubles).zfill(2)} руб. {str(cents).zfill(2)} коп."
+        return f"{str(roubles).zfill(2)} руб. {cents.zfill(2)} коп."
 
 
-print(list(map(human_readable_price, prices)))
+def get_rub(x):
+    return int(x[:x.index(" ")])
 
-"""
-print(id(prices))
-prices.sort()
-print(prices)
-print(id(prices))
 
-prices_descending = sorted(prices, reverse=True)
+print(f"Id списка prices {id(prices)}")
+new_prices = list(map(human_readable_price, prices))
+print(new_prices)
+print(f"Id списка new_prices {id(new_prices)}")
+
+new_prices.sort(key=get_rub)
+print(new_prices)
+print(f"Id списка new_prices {id(new_prices)}")
+
+prices_descending = sorted(new_prices, key=get_rub, reverse=True)
 print(prices_descending)
 print(prices_descending[:5])
-"""
