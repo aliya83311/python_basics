@@ -9,9 +9,10 @@ def get_jokes(num, repeat=True):
     """ Make jokes from lists.
 
     Arguments:
-    num -- number of jokes the user wants to make.
-    repeat -- defines if one word can be used in multiple jokes.
-    Returns a list containing strings.
+    num -- required. Sets the number of jokes the user wants to make.
+    repeat -- optional. Defines if one word can be used in multiple jokes.
+
+    The function returns a list containing strings.
     """
     result = []
     if repeat:
