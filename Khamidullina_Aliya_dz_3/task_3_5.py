@@ -3,42 +3,41 @@ from random import randrange
 nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
 adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
 adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+# words = ["похоже", "к сожалению", "почему-то", "внезапно", "наконец-то"]
 
 
-def get_jokes(num, repeat=True):
-    """ Make jokes from lists.
+def get_jokes(num, repeat=True, **kwargs):
+    """ Make jokes from strings stored in lists.
 
-    Arguments:
-    num -- required. Sets the number of jokes the user wants to make.
-    repeat -- optional. Defines if one word can be used in multiple jokes.
+        Keyword arguments:
+        num -- required. The number of jokes the user wants to make.
+        repeat -- optional. If True, one word can be used in multiple jokes.
+        If False, one word can be used in one joke only.
+        kwargs -- required. Any number of lists from which jokes should be made.
 
-    The function returns a list containing strings.
-    """
+        Returns a list containing strings.
+        """
     result = []
     if repeat:
-        for n in range(num):
-            noun = nouns[randrange(len(nouns))]
-            adverb = adverbs[randrange(len(adverbs))]
-            adjective = adjectives[randrange(len(adjectives))]
-            result.append(f"{noun} {adverb} {adjective}")
+        for i in range(num):
+            joke = ""
+            for value in kwargs.values():
+                joke += f"{value[randrange(len(value))]} "
+            result.append(joke[:-1])
         return result
     else:
-        nouns1 = nouns.copy()
-        adverbs1 = adverbs.copy()
-        adjectives1 = adjectives.copy()
         try:
-            for n in range(num):
-                noun = nouns1[randrange(len(nouns1))]
-                adverb = adverbs1[randrange(len(adverbs1))]
-                adjective = adjectives1[randrange(len(adjectives1))]
-                result.append(f"{noun} {adverb} {adjective}")
-                nouns1.pop(nouns1.index(noun))
-                adverbs1.pop(adverbs1.index(adverb))
-                adjectives1.pop(adjectives1.index(adjective))
+            for i in range(num):
+                joke = ""
+                for value in kwargs.values():
+                    word = value[randrange(len(value))]
+                    joke += f"{word} "
+                    value.remove(word)
+                result.append(joke[:-1])
         except ValueError:
             print("Закончились слова в списках!")
         finally:
             return result
 
 
-print(get_jokes(8, False))
+print(get_jokes(4, False, nouns=nouns, adverbs=adverbs, adjectives=adjectives))
