@@ -1,4 +1,5 @@
 from random import randrange
+from copy import deepcopy
 
 nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
 adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
@@ -26,10 +27,11 @@ def get_jokes(num, repeat=True, **kwargs):
             result.append(joke[:-1])
         return result
     else:
+        words_dict = deepcopy(kwargs)
         try:
             for i in range(num):
                 joke = ""
-                for value in kwargs.values():
+                for value in words_dict.values():
                     word = value[randrange(len(value))]
                     joke += f"{word} "
                     value.remove(word)
@@ -41,3 +43,4 @@ def get_jokes(num, repeat=True, **kwargs):
 
 
 print(get_jokes(4, False, nouns=nouns, adverbs=adverbs, adjectives=adjectives))
+print(nouns)
