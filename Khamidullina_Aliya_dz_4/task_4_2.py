@@ -22,4 +22,5 @@ def currency_rates(code):
 
 print(currency_rates("eur"))
 print(currency_rates("UsD"))
+print(currency_rates("sss"))
 print(currency_rates(456456456))
