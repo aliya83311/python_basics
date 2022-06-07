@@ -1,6 +1,7 @@
 from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime
 import requests
+import time
 import xml.etree.ElementTree as et
 
 
@@ -25,7 +26,11 @@ def currency_rates(code):
                 return f"Today {current_date} {nominal} {code} is {value} roubles."
 
 
+start = time.perf_counter()
 print(currency_rates("eur"))
+end = time.perf_counter()
+print(end - start)
 print(currency_rates("UsD"))
 print(currency_rates("KZT"))
+print(currency_rates("sss"))
 print(currency_rates(456456456))
